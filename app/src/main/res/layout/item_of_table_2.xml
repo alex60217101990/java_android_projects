@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#E6E6FA"
+    >
+  <!--  <TextView
+        android:id="@+id/Id21"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:text="Id: " />
+    <TextView
+        android:id="@+id/Id2"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Id21"
+        android:layout_toRightOf="@+id/Id21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2F4F4F"
+        android:text="TextView" />-->
+    <TextView
+        android:id="@+id/Name21"
+
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: " />
+    <TextView
+        android:id="@+id/Name2"
+
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Name21"
+        android:layout_toRightOf="@+id/Name21"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <TextView
+        android:text="Order: "
+        android:layout_below="@id/Name21"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Orders21" />
+    <TextView
+        android:text="TextView"
+        android:layout_below="@id/Name2"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Orders21"
+        android:layout_toRightOf="@+id/Orders21"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Orders2" />
+    <TextView
+        android:text="Duration of work: "
+        android:layout_below="@id/Orders21"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DurOfWork21" />
+    <TextView
+        android:text="TextView"
+        android:layout_below="@id/Orders2"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/DurOfWork21"
+        android:layout_toRightOf="@+id/DurOfWork21"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DurOfWork2" />
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/Change21"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_below="@id/DurOfWork21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change: " />
+    <TextView
+        android:id="@+id/Change2"
+        android:layout_below="@id/DurOfWork2"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Change21"
+        android:layout_toRightOf="@+id/Change21"
+        android:layout_width="wrap_content"
+        android:textColor="#2F4F4F"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/Foto21"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/Change21"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foto: " />
+    <ImageView
+        android:text="TextView"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Foto21"
+        android:layout_toRightOf="@+id/Foto21"
+        android:layout_below="@id/Change2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/Foto2"
+        android:src="@drawable/ic_delete_forever_black_24dp"/>
+
+</RelativeLayout>

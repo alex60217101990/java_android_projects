@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#E6E6FA"
+    >
+    <TextView
+        android:id="@+id/Id1"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:text="Id: " />
+    <TextView
+        android:id="@+id/Id"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Id1"
+        android:layout_toRightOf="@+id/Id1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2F4F4F"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/Name1"
+        android:layout_below="@id/Id1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: " />
+    <TextView
+        android:id="@+id/Name"
+        android:layout_below="@id/Id"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Name1"
+        android:layout_toRightOf="@+id/Name1"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <TextView
+        android:text="Price: "
+        android:layout_below="@id/Name1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Price1" />
+    <TextView
+        android:text="TextView"
+        android:layout_below="@id/Name"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Price1"
+        android:layout_toRightOf="@+id/Price1"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Price" />
+    <TextView
+        android:text="Date: "
+        android:layout_below="@id/Price1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Date1" />
+    <TextView
+        android:text="TextView"
+        android:layout_below="@id/Price"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/Date1"
+        android:layout_toRightOf="@+id/Date1"
+        android:textColor="#2F4F4F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Date" />
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/time_type1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_below="@id/Date1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time type: " />
+    <TextView
+        android:id="@+id/time_type"
+        android:layout_below="@id/Date"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/time_type1"
+        android:layout_toRightOf="@+id/time_type1"
+        android:layout_width="wrap_content"
+        android:textColor="#2F4F4F"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/time_of_day1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_below="@id/time_type1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change: " />
+    <TextView
+        android:id="@+id/time_of_day"
+        android:layout_below="@id/time_type"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/time_of_day1"
+        android:layout_toRightOf="@+id/time_type1"
+        android:layout_width="wrap_content"
+        android:textColor="#2F4F4F"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/icon1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/time_of_day1"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#A9A9A9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Icon: " />
+    <ImageView
+        android:text="TextView"
+        android:paddingLeft="5dp"
+        android:layout_alignBaseline="@+id/icon1"
+        android:layout_toRightOf="@+id/icon1"
+        android:layout_below="@id/time_of_day"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/Icon"
+        android:src="@drawable/ic_power_settings_new_black_24dp"/>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
