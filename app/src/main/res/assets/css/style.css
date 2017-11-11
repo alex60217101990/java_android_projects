@@ -1,0 +1,213 @@
+	.ex-form {
+		position:relative;
+		margin:200px auto;
+		width:440px;
+		min-height: 400px;
+		-webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+		font-family:Arial, sans-serif;
+		font-size:12px;
+		padding:30px;
+		background:none;
+		background: rgba(150, 150, 150, 0.2);
+		-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33969696,endColorstr=#33969696);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33969696,endColorstr=#33969696);
+		zoom: 1;
+	}
+		h1, h2 {
+			margin-top:0;
+			font-family:Arial, sans-serif;
+			font-size:18px;
+			color: #6e6a65;
+			text-transform: uppercase;
+			text-align: center;
+		}
+		h2 {
+			margin:30px 0 10px;
+			font-size:14px;
+		}
+		.ui-progressbar {
+			background: #e5e4e3!important;
+			border: medium none;
+			border-radius: 15px;
+			box-shadow: 0 1px 2px #aaa inset;
+		}
+		.ui-progressbar .ui-progressbar-value {
+			background: none;
+			-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#98c8a9,endColorstr=#e9e1a8);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#98c8a9,endColorstr=#e9e1a8);
+			
+			background: -moz-linear-gradient( left, #98c8a9, #e9e1a8 );
+			background: -webkit-linear-gradient( left, #98c8a9, #e9e1a8 );
+			background: -o-linear-gradient( left, #98c8a9, #e9e1a8 );
+			background: -khtml-linear-gradient( left, #98c8a9, #e9e1a8 );
+			background: linear-gradient( to right, #98c8a9, #e9e1a8 );
+			
+			border: none;	
+			border-radius: 15px;
+			box-shadow: 0 1px 2px #999 inset;
+		}
+		#amount {
+			position: absolute;
+			margin: -19px 0 0 -30px;
+			width: 100%;
+			font-size: 10px;
+			font-weight: bold;
+			color: #677764;
+			text-align: center;
+		}
+		.form-panel fieldset {
+			width:430px;
+			height:170px;
+			margin:0 auto 20px;
+			padding:20px 0;			
+			border: none;
+			background:none;
+			background: rgba(255, 255, 255, 0.2);
+			-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff,endColorstr=#33ffffff);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff,endColorstr=#33ffffff);
+			zoom: 1;
+		}
+			.form-panel label, .form-panel .label {
+				width: 100%;
+				clear: left;
+				cursor: pointer;
+			}
+				.form-panel .title {
+					float:left;
+					padding-top:5px;
+					margin-right:10px;
+					width:130px;
+					text-align:right;
+					color: #6E6A65;
+				}
+				.form-panel .input {
+					float: left;
+					padding: 3px;
+					margin-bottom: 13px;
+					border-radius: 12px;
+					
+					background: none;
+					-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#98c8a9,endColorstr=#e9e1a8);
+					filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#98c8a9,endColorstr=#e9e1a8);
+			
+					background: -moz-linear-gradient( top, #98c8a9, #e9e1a8 );
+					background: -webkit-linear-gradient( top, #98c8a9, #e9e1a8 );
+					background: -o-linear-gradient( top, #98c8a9, #e9e1a8 );
+					background: -khtml-linear-gradient( top, #98c8a9, #e9e1a8 );
+					background: linear-gradient( to bottom, #98c8a9, #e9e1a8 );
+				}
+					.form-panel input, .form-panel textarea {
+						float: left;
+						padding: 8px 13px;
+						margin: -3px;
+						width: 240px;
+						height: 12px;
+						line-height: 12px;
+						font-size: 12px;
+						color: #9A9895;
+						border: 1px solid #D7D6D5;
+						cursor: text;
+						border-radius: 12px;
+						box-shadow: 0 1px 2px #999 inset;
+					}
+						.form-panel input:focus, .form-panel textarea:focus {
+							padding: 5px 10px;
+							margin: 0;
+							border-color: #fff;
+							box-shadow: none ;
+							outline: 0 none transparent;
+						}
+					.form-panel textarea {
+						height: 60px;
+					}
+			#thanks {
+				text-align:center;
+			}
+				#thanks p {
+					margin-top:58px;
+					font-size:18px;
+					color: #6e6a65;
+				}
+	.ex-form button {
+		float:right;
+		padding: 15px 20px 14px;
+		margin-left: 30px;
+		color: #9ca1a2;
+		text-transform: uppercase;
+		font-size: 10px;
+		font-weight: bold;
+		border: 1px solid #fff;
+		background: #fff;
+		
+		background: -moz-linear-gradient( top, #ffffff, #eaeced );
+		background: -webkit-linear-gradient( top, #ffffff, #eaeced );
+		background: -o-linear-gradient( top, #ffffff, #eaeced );
+		background: -khtml-linear-gradient( top, #ffffff, #eaeced );
+		background: linear-gradient( to bottom, #ffffff, #eaeced );
+		
+		border-radius: 25px;
+		box-shadow: 0 1px 2px #787878;
+		
+		cursor: pointer;
+	}
+		.ex-form button:hover {
+			opacity: 0.8;
+			-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+			filter: alpha(opacity=80);
+		}
+		.ex-form button:disabled {
+			cursor: default;
+			opacity: 0.6;
+			-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+			filter: alpha(opacity=60);
+		}
+	#back {
+		padding-left: 15px;
+	}
+		#back span{
+			left: -5px
+		}
+	#next {
+		padding-right: 15px;
+	}
+		#next span{
+			right: -5px
+		}
+		.ex-form button span {
+			position: relative;
+			padding: 2px 5px;
+			top: -1px;
+			background: #FBF9F7;
+			border: 1px solid #d9dee0;	
+			border-radius: 10px;
+		}
+.ui-progressbar { height:2em; text-align: left; overflow: hidden; }
+.ui-progressbar .ui-progressbar-value {margin: -1px; height:100%; }
+.ui-helper-hidden { display: none; }
+.ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+.ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.ui-helper-clearfix:before, .ui-helper-clearfix:after { content: ""; display: table; }
+.ui-helper-clearfix:after { clear: both; }
+.ui-helper-clearfix { zoom: 1; }
+.ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-disabled { cursor: default !important; }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
