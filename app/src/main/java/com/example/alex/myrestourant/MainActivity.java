@@ -50,6 +50,8 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.R.id.content;
 import static android.R.id.message;
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                         sost1++;
                     //    myBrowser.setVisibility(View.INVISIBLE);
                         /*------------------------------------------------------------------------*/
-                        if (sost1 > 8) sost1 = 1;
+                        if (sost1 > 9) sost1 = 1;
                         switch (sost1) {
                             case 1: {
                                 myBrowser=null;
@@ -160,6 +162,13 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                                 myBrowser.loadUrl("file:///android_asset/index8.html");
                                 break;
                             }
+                            case 9: {
+                                myBrowser=null;
+                                myBrowser = (WebView) findViewById(R.id.webview);
+                                myBrowser.getSettings().setJavaScriptEnabled(true);
+                                myBrowser.loadUrl("file:///android_asset/index9.html");
+                                break;
+                            }
 
                         /*------------------------------------------------------------------------*/
                         }
@@ -168,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                 });
             }
         });
+
 
 
 
@@ -276,70 +286,70 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
     }
 
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
+            @Override
+            public boolean onTouch (View v, MotionEvent event){
 
-        // получаем координаты касания
-        float mX = event.getX();
-        float mY = event.getY();
+                // получаем координаты касания
+                float mX = event.getX();
+                float mY = event.getY();
 
-        // переключатель в зависимости от типа события
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN: { // нажатие
-            }
-            case MotionEvent.ACTION_MOVE: { // движение
-                Display display = getWindowManager().getDefaultDisplay();
-                int width = display.getWidth();  // deprecated
-                int height = display.getHeight();  // deprecated
-                if(mX>width/2){
-                    sost++;}
-                else sost--;
-                    if(sost>4) sost=1;
-                    if(sost<1) sost=4;
-                    switch (sost) {
-                        case 2: {
-                            // Show status bar
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            loadFragment(new Fragment1(), 2);
-                            text.setText("Таблица базы данных:");
+                // переключатель в зависимости от типа события
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // нажатие
+                    }
+                    case MotionEvent.ACTION_MOVE: { // движение
+                        Display display = getWindowManager().getDefaultDisplay();
+                        int width = display.getWidth();  // deprecated
+                        int height = display.getHeight();  // deprecated
+                        if (mX > width / 2) {
+                            sost++;
+                        } else sost--;
+                        if (sost > 4) sost = 1;
+                        if (sost < 1) sost = 4;
+                        switch (sost) {
+                            case 2: {
+                                // Show status bar
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                                loadFragment(new Fragment1(), 2);
+                                text.setText("Таблица базы данных:");
+                            }
+                            case 1: {
+                                // Show status bar
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                                text.setText("Exit:");
+                                break;
+                            }
+                            case 3: {
+                                // Show status bar
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                                text.setText("Удаление информации из базы данных:");
+                                break;
+                            }
+                            case 4: {
+                                // Hide status bar
+                                getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                                loadFragment(new Fragment2(), 4);
+                                text.setText("Добавление информации в таблицу заказов:");
+                                break;
+                            }
+                            case 5: {
+                                // Show status bar
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                                loadFragment(new Fragment3(), 5);
+                                text.setText("Добавление информации в таблицу сотрудников:");
+                                break;
+                            }
                         }
-                        case 1: {
-                            // Show status bar
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            text.setText("Exit:");
-                            break;
-                        }
-                        case 3: {
-                            // Show status bar
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            text.setText("Удаление информации из базы данных:");
-                            break;
-                        }
-                        case 4: {
-                            // Hide status bar
-                            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            loadFragment(new Fragment2(), 4);
-                            text.setText("Добавление информации в таблицу заказов:");
-                            break;
-                        }
-                        case 5: {
-                            // Show status bar
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            loadFragment(new Fragment3(), 5);
-                            text.setText("Добавление информации в таблицу сотрудников:");
-                            break;
-                        }
+                    }
+                    break;
+                    case MotionEvent.ACTION_UP: // отпускание
+
+                    case MotionEvent.ACTION_CANCEL:
+                        // ничего не делаем
+                        break;
                 }
+                return true;
             }
-            break;
-            case MotionEvent.ACTION_UP: // отпускание
-
-            case MotionEvent.ACTION_CANCEL:
-                // ничего не делаем
-                break;
-        }
-        return true;
-    }
 
 }
 
