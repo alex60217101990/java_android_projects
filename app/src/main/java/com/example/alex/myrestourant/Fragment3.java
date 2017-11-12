@@ -41,8 +41,8 @@ public class Fragment3 extends Fragment {
     static long proverka=0;
     public static long sinchronization_table2;
     private String t_name;
-    private long t_orders;
-    private long t_count;
+    private long t_orders=-1;
+    private long t_count=-1;
     private String t_change;
     private String t_foto;
     EditText editText1;
@@ -127,7 +127,9 @@ public class Fragment3 extends Fragment {
                     try {
                         db = new DBConnectorAll(view.getContext());
                         int size = db.selectAllTable2().size();
-                        if (size > 0) {
+                        if (size >= 0) {
+                            Toast.makeText(view.getContext(), "OK:****"+t_name+t_orders+t_count+t_change+t_foto,
+                                    Toast.LENGTH_SHORT).show();
                             db.Insert(new TableWorkersDataClass(t_name, t_orders, t_count, t_change, t_foto));
                             sinchronization_table2++;
                             proverka = 0;
@@ -137,6 +139,15 @@ public class Fragment3 extends Fragment {
                                 Toast.LENGTH_LONG);
                         toast3.show();
                     }
+                }
+                else{
+                    if((!t_name.isEmpty())&&(t_orders!=-1)&&(t_count!=-1)&&(!t_change.isEmpty())&&(!t_foto.isEmpty())){
+                        db.Insert(new TableWorkersDataClass(t_name, t_orders, t_count, t_change, t_foto));
+                        sinchronization_table2++;
+                        proverka = 0;
+                    }
+                    Toast.makeText(view.getContext(), "OK:****0000"+t_name+t_orders+t_count+t_change+t_foto,
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

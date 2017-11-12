@@ -134,6 +134,8 @@ public class Fragment2 extends Fragment {
                         db = new DBConnectorAll(view.getContext());
                         int size = db.selectAllTable1().size();
                         if (size > 0) {
+                            Toast.makeText(view.getContext(), "OK:....."+t_name+t_price+t_date+t_type+t_change+t_icon,
+                                    Toast.LENGTH_SHORT).show();
                             db.Insert(new TableMenuDataClass(t_name, t_price, t_date, t_type, t_change, t_icon));
                             sinchronization++;
                             proverka = 0;

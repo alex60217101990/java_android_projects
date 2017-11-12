@@ -68,7 +68,7 @@ public class DBConnectorAll implements WorkWithDBInterface, ConstForDataBase{
         return mDataBase.update(TABLE_NAME, cv, COLUMN_ID + " = ?", new String[] {String.valueOf(/*model1.getId()*/id) });
     }
 
-    public int DeleteAll(int identificator) {
+    public synchronized int DeleteAll(int identificator) {
         if (identificator==2) {  return mDataBase1.delete(TABLE1_NAME, null, null); }
         else{ return mDataBase.delete(TABLE_NAME, null, null); }
     }
@@ -80,7 +80,7 @@ public class DBConnectorAll implements WorkWithDBInterface, ConstForDataBase{
                 mDataBase.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[] { String.valueOf(id) });
     }*/
 
-    public void DeleteById(String name, int identificator){
+    public synchronized void DeleteById(String name, int identificator){
         if(identificator==2)
             mDataBase1.delete(TABLE1_NAME, COLUMN_NAME1 + " = ?", new String[] { name });
         else

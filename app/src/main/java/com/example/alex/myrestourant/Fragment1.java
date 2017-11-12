@@ -22,12 +22,13 @@ import java.util.concurrent.TimeUnit;
 import static android.R.id.tabhost;
 import static com.example.alex.myrestourant.Fragment2.sinchronization;
 import static com.example.alex.myrestourant.Fragment3.sinchronization_table2;
+import static com.example.alex.myrestourant.Fragment4.counter_del_all_base2;
 import static com.example.alex.myrestourant.MainActivity.allSize;
 import static com.example.alex.myrestourant.MainActivity.counter;
 import static com.example.alex.myrestourant.MainActivity.table1_static;
 import static com.example.alex.myrestourant.MainActivity.table2_static;
 import static com.example.alex.myrestourant.MainActivity.time_price;
-
+import static com.example.alex.myrestourant.Fragment4.counter_del_all_base1;
 /**
  * Created by Alex on 25.10.2017.
  */
@@ -173,7 +174,7 @@ public class Fragment1 extends Fragment {
     /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     class DBwork extends AsyncTask<Void, Void, Boolean> {
         View v;
-
+int a=0;
 
         // DBConnectorAll db;
         public DBwork(View gview) {
@@ -196,17 +197,36 @@ public class Fragment1 extends Fragment {
 
                 if (counter == 1||counter==0) {
                     if(allSize==0) {
-                        long a1 = db.DeleteAll(1);
-                        db.DeleteAll(2);
-                        fillData(db);
+                    //    long a1 = db.DeleteAll(1);
+                    //    db.DeleteAll(2);
+                    //    fillData(db);
                     }
                     table2 = db.selectAllTable2();
                     table1 = db.selectAllTable1();
                     allSize++;
                     table1_static = table1;
                     table2_static = table2;
-                } else {
+                    a=1;
+                } else
+             /*   if(counter_del_all_base1>0){
+                    db.DeleteAll(1);
+                    table2 = db.selectAllTable2();
+                    table1 = db.selectAllTable1();
+                    allSize++;
+                    table1_static = table1;
+                    table2_static = table2;
+                }else
+                if(counter_del_all_base2>0){
+                    db.DeleteAll(2);
+                    table2 = db.selectAllTable2();
+                    table1 = db.selectAllTable1();
+                    allSize++;
+                    table1_static = table1;
+                    table2_static = table2;
+                }
+                    else*/{
                     if (sinchronization > 0 || sinchronization_table2 > 0) {
+
                         table2 = db.selectAllTable2();
                         table1 = db.selectAllTable1();
 
@@ -214,7 +234,9 @@ public class Fragment1 extends Fragment {
                         sinchronization_table2 = 0;
                         table1_static = table1;
                         table2_static = table2;
+                        a=2;
                     } else {
+                        a=3;
                         table1 = table1_static;
                         table2 = table2_static;
                     }
@@ -234,7 +256,8 @@ public class Fragment1 extends Fragment {
                 if(result==true){
                     Toast toast1 = Toast.makeText(v.getContext(), "Stop uploading data.", Toast.LENGTH_SHORT);
                     toast1.show();
-
+                    Toast toast2 = Toast.makeText(v.getContext(), "---------"+a+"----------", Toast.LENGTH_SHORT);
+                    toast2.show();
                     // получаем элемент ListView
                     //    ListView countriesList = (ListView) findViewById(R.id.countriesList);
                     GridView countriesList = (GridView) v.findViewById(R.id.gridview);
@@ -275,11 +298,61 @@ public class Fragment1 extends Fragment {
                     });
 
                 }else{
-                    Toast toast1 = Toast.makeText(v.getContext(), "A read error occurred.", Toast.LENGTH_SHORT);
+                    Toast toast1 = Toast.makeText(v.getContext(), "A read error occurred0.", Toast.LENGTH_SHORT);
                     toast1.show();
+
+                    /*///////////////////////////////////////////////////////////////////////////////////*/
+                    if(counter_del_all_base1>0 || counter_del_all_base2>0) {
+                        //    ListView countriesList = (ListView) findViewById(R.id.countriesList);
+                       // db.DeleteAll(1);
+                       // db.DeleteAll(2);
+                        GridView countriesList = (GridView) v.findViewById(R.id.gridview);
+                        GridView countriesList1 = (GridView) v.findViewById(R.id.gridview1);
+                        // создаем адаптер
+
+                        elements_t1 = new ListAdapter(v.getContext(), R.layout.item_of_table_1, table1_static);
+                        // создаем адаптер 2
+                        elements_t2 = new ListAdapterForTable2(v.getContext(), R.layout.item_of_table_2, table2_static);
+
+                        /// устанавливаем адаптер's
+                        countriesList.setAdapter(elements_t1);
+                        countriesList1.setAdapter(elements_t2);
+
+
+                    /*oтслеживаем какие пункты из таблицы меню были выбраны.*/
+                        countriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View v,
+                                                    int position, long id) {
+                                // DO something
+                                //String time=db.SelectTable1().getName();
+                                time_price += table1.get(position).getPrice();
+                                Toast toast = Toast.makeText(v.getContext(), "" + time_price, Toast.LENGTH_LONG);
+                                toast.show();
+
+                            }
+                        });
+                    /*тслеживаем какие пункты из таблицы сотрудников были выбраны.*/
+                        countriesList1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View v,
+                                                    int position, long id) {
+                                // DO something
+                                Toast toast = Toast.makeText(v.getContext(), position + "-" + id, Toast.LENGTH_LONG);
+                                toast.show();
+
+                            }
+                        });
+                    }
+                    /*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
+
                 }
             }catch (Exception e){
-                Toast toast1 = Toast.makeText(v.getContext(), "A read error occurred.", Toast.LENGTH_SHORT);
+                Toast toast1 = Toast.makeText(v.getContext(), "A read error occurred1.", Toast.LENGTH_SHORT);
                 toast1.show();
                 progressBar.setVisibility(v.INVISIBLE);
             }

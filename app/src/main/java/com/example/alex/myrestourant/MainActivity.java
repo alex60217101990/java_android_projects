@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
         container = (FrameLayout) findViewById(R.id.container);
 
 
-
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -177,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                 });
             }
         });
-
 
 
 
