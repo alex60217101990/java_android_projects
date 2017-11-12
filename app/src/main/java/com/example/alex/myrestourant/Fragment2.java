@@ -41,9 +41,9 @@ public class Fragment2 extends Fragment {
     private AnimationDrawable mAnimationDrawable;
     private long t_id;
     private String t_name;
-    private double t_price;
+    private double t_price=-1;
     public static int sinchronization;
-    private long t_date;
+    private long t_date=-1;
     private String t_type;
     private String t_change;
     private String t_icon;
@@ -63,7 +63,7 @@ public class Fragment2 extends Fragment {
         enter.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            try {
                 String[] str1 = new String[6];
                 editText1 = (EditText) view.findViewById(R.id.t1);
                 str1[0] = editText1.getText().toString();
@@ -133,18 +133,31 @@ public class Fragment2 extends Fragment {
                     try {
                         db = new DBConnectorAll(view.getContext());
                         int size = db.selectAllTable1().size();
-                        if (size > 0) {
-                            Toast.makeText(view.getContext(), "OK:....."+t_name+t_price+t_date+t_type+t_change+t_icon,
+                        if (size >= 0) {
+                            Toast.makeText(view.getContext(), "OK:....." + t_name + t_price + t_date + t_type + t_change + t_icon,
                                     Toast.LENGTH_SHORT).show();
                             db.Insert(new TableMenuDataClass(t_name, t_price, t_date, t_type, t_change, t_icon));
                             sinchronization++;
                             proverka = 0;
                         }
                     } catch (Exception e) {
-                        Toast toast3 = Toast.makeText(view.getContext(), "Error writing to the database.", Toast.LENGTH_LONG);
+                        Toast toast3 = Toast.makeText(view.getContext(), "Error writing to the database.", Toast.LENGTH_SHORT);
                         toast3.show();
                     }
+                } else {
+                    if ((!t_name.isEmpty()) && (t_price != -1) && (t_date != -1) && (!t_type.isEmpty()) &&
+                            (!t_change.isEmpty()) && (!t_icon.isEmpty())) {
+                        db.Insert(new TableMenuDataClass(t_name, t_price, t_date, t_type, t_change, t_icon));
+                        sinchronization++;
+                        proverka = 0;
+                    }
+                    Toast.makeText(view.getContext(), "OK:.....0000" + t_name + t_price + t_date + t_type + t_change + t_icon,
+                            Toast.LENGTH_SHORT).show();
                 }
+            }catch (Exception e){
+                Toast.makeText(view.getContext(), "NOT OK:",
+                        Toast.LENGTH_SHORT).show();
+            }
             }
         });
 

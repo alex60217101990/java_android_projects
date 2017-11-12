@@ -207,24 +207,7 @@ int a=0;
                     table1_static = table1;
                     table2_static = table2;
                     a=1;
-                } else
-             /*   if(counter_del_all_base1>0){
-                    db.DeleteAll(1);
-                    table2 = db.selectAllTable2();
-                    table1 = db.selectAllTable1();
-                    allSize++;
-                    table1_static = table1;
-                    table2_static = table2;
-                }else
-                if(counter_del_all_base2>0){
-                    db.DeleteAll(2);
-                    table2 = db.selectAllTable2();
-                    table1 = db.selectAllTable1();
-                    allSize++;
-                    table1_static = table1;
-                    table2_static = table2;
-                }
-                    else*/{
+                } else {
                     if (sinchronization > 0 || sinchronization_table2 > 0) {
 
                         table2 = db.selectAllTable2();
@@ -235,6 +218,9 @@ int a=0;
                         table1_static = table1;
                         table2_static = table2;
                         a=2;
+                        /*****************************************/
+                        if(table1.size()==0 && table2.size()==0)return true;
+                        /*****************************************/
                     } else {
                         a=3;
                         table1 = table1_static;
@@ -345,10 +331,6 @@ int a=0;
                         });
                     }
                     /*///////////////////////////////////////////////////////////////////////////////////*/
-
-
-
-
 
                 }
             }catch (Exception e){

@@ -67,7 +67,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:background="@drawable/border_edittext"
-            android:hint="Число (в формате 00 00 0000):"
+            android:hint="Число (в формате 00 д. 00 м. 0000 г.):"
             android:textSize="18dp"
             android:id="@+id/t3"
             android:layout_below="@+id/t2"
