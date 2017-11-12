@@ -32,10 +32,12 @@ import static com.example.alex.myrestourant.MainActivity.table2_static;
 
 public class Fragment4 extends Fragment {
     private AnimationDrawable mAnimationDrawable;
-    private long position_in_table2=0;
+    private Integer position_right=-1;
     private Integer position_left=-1;
-    private String []data;
-    private String []data1;
+    private ArrayList<String>Data;
+    private ArrayList<String>Data1;
+    private ArrayAdapter<String> adapter1;
+    private ArrayAdapter<String> adapter;
     private ArrayList<TableMenuDataClass> table1 = new ArrayList<>();
     private ArrayList<TableWorkersDataClass>table2=new ArrayList<>();
     @Override
@@ -48,20 +50,22 @@ public class Fragment4 extends Fragment {
 
         mAnimationDrawable = (AnimationDrawable) imageView.getBackground();
         mAnimationDrawable.start();
+        
         // адаптер 1
-        data=new String[table1_static.size()+1];
-        int i=1; data[0]="menu elements:";
+        Data=new ArrayList<String>();
+        Data.add("menu elements:");
         for (TableMenuDataClass a:table1_static){
-            data[i++]=a.getName();
+            Data.add(a.getName());
         }
         // адаптер 2
-        data1=new String[table2_static.size()+1];
-        int j=1; data1[0]="worker's:";
+        Data1=new ArrayList<String>();
+        Data1.add("worker's:");
         for (TableWorkersDataClass a:table2_static){
-            data1[j++]=a.getName().split("[А-Я][а-я]+?")[0];
+            Data1.add(a.getName().split("[А-Я][а-я]+?")[0]);
         }
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, data1);
+
+        adapter1 = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, Data1);
         adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
         Spinner spinner1 = (Spinner) view.findViewById(R.id.spinner2);
         spinner1.setAdapter(adapter1);
@@ -77,7 +81,7 @@ public class Fragment4 extends Fragment {
                                        final int position, long id) {
                 // показываем позиция нажатого элемента
             //    Toast.makeText(view.getContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-                position_in_table2=position;
+
                 try{
                     position_left=position;
                     Task1 task=new Task1(view);
@@ -95,27 +99,38 @@ public class Fragment4 extends Fragment {
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
       //  Toast.makeText(view.getContext(), ""+data.length, Toast.LENGTH_SHORT).show();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, data);
+        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, Data);
         adapter.setDropDownViewResource(/*android.R.layout.simple_spinner_dropdown_item*/R.layout.spinner_dropdown_item);
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner1);
         spinner.setAdapter(adapter);
         // заголовок
         spinner.setPrompt("Menu elements for delete");
-        // выделяем элемент
+        // выделяем элемент по-умолчанию:
     //    spinner.setSelection(2);
+        /*-----------------------------------------------------------------------------------------------------------------*/
         // устанавливаем обработчик нажатия
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // показываем позиция нажатого элемента
-                Toast.makeText(view.getContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(view.getContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+
+                try{
+                    position_right=position;
+                    Task1 task=new Task1(view);
+                    task.execute();
+
+                }catch (Exception e){
+                    //      Toast.makeText(view.getContext(), "delete error", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
 
+/*------------------------------------------------------------------------------------------------------------------------*/
 
 
         final Animation animAlpha = AnimationUtils.loadAnimation(view.getContext(), R.anim.alpha);
@@ -144,7 +159,6 @@ public class Fragment4 extends Fragment {
 
 
 
-
     class Task1 extends AsyncTask<Void, Integer, Boolean> {
         View view;
         private DBConnectorAll db;
@@ -160,8 +174,14 @@ public class Fragment4 extends Fragment {
         @Override
         protected Boolean doInBackground(Void... position) {
             try {
-                if(position_left!=0)
-                db.DeleteById(data[position_left],1);
+                if(position_right!=0) {
+                    db.DeleteById(Data.get(position_right), 1);
+                    Data.remove(position_right);
+                }else
+                if(position_left!=0) {
+                    db.DeleteById(Data1.get(position_left), 2);
+                    Data1.remove(position_left);
+                }
                 sinchronization++;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -176,6 +196,8 @@ public class Fragment4 extends Fragment {
            // mInfoTextView.setText("Залез");
             if(result==true){
                 Toast.makeText(view.getContext(), "delete1", Toast.LENGTH_SHORT).show();
+                adapter1 = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, Data1);
+                adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, Data);
             }else{
                 Toast.makeText(view.getContext(), "delete1 error", Toast.LENGTH_SHORT).show();
             }
