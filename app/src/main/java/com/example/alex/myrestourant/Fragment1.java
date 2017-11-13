@@ -309,8 +309,8 @@ int a=0;
                                     " Продолжительность работы: "+table2.get(position).getDuration_of_work()+". \n\r"+
                                     " Смена: "+table2.get(position).getChange_worker()+". \n\r"+
                                     "----------------------------------"+" \n\r";
-                            FileByteWriter(WorkersInformation, "Workers.txt");
-                            Toast.makeText(v.getContext(), FileByteRead("Workers.txt"), Toast.LENGTH_SHORT).show();
+                            FileByteWriter(WorkersInformation, "Workers.bin");
+                            Toast.makeText(v.getContext(), FileByteRead("Workers.bin"), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -368,8 +368,8 @@ int a=0;
                                         " Продолжительность работы: "+table2.get(position).getDuration_of_work()+". \n\r"+
                                         " Смена: "+table2.get(position).getChange_worker()+". \n\r"+
                                         "----------------------------------"+" \n\r";
-                                FileByteWriter(WorkersInformation, "Workers.txt");
-                                Toast.makeText(v.getContext(), FileByteRead("Workers.txt"), Toast.LENGTH_SHORT).show();
+                                FileByteWriter(WorkersInformation, "Workers.bin");
+                                Toast.makeText(v.getContext(), FileByteRead("Workers.bin"), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.skyfishjy.library.RippleBackground;
+
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.alex.myrestourant.Fragment2.sinchronization;
@@ -159,6 +164,7 @@ public class Fragment4 extends Fragment {
                 t.execute();
             }
         });
+
         return view;
     }
 
