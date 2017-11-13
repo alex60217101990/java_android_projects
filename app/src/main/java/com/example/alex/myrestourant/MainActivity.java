@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -50,6 +51,17 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,20 +69,23 @@ import java.util.TimerTask;
 import static android.R.id.content;
 import static android.R.id.message;
 import static android.R.id.tabhost;
+import static android.provider.Telephony.Mms.Part.FILENAME;
 import static java.security.AccessController.getContext;
 
 import android.view.View.OnTouchListener;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener {
-    FrameLayout container;
+    private FrameLayout container;
     int sost1=0;
-    WebView myBrowser;
-    FragmentManager myFragmentManager;
-    Fragment1 myFragment1;
-    Fragment2 myFragment2;
-    Fragment3 myFragment3;
+    private WebView myBrowser;
+    private FragmentManager myFragmentManager;
+    private Fragment1 myFragment1;
+    private Fragment2 myFragment2;
+    private Fragment3 myFragment3;
+    static int GlobCounterOrders=0;
+    final String FILE_NAME = "OOrders.txt";
     static int allSize=0;
-    Handler handler = new Handler();
+    private Handler handler = new Handler();
     static int counter;
     static double time_price;
     static ArrayList<TableMenuDataClass> table1_static = new ArrayList<TableMenuDataClass>();
@@ -349,7 +364,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                 }
                 return true;
             }
-
 }
 
 

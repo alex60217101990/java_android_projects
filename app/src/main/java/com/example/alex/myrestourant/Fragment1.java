@@ -1,8 +1,11 @@
 package com.example.alex.myrestourant;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +17,30 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import static android.R.id.tabhost;
+import static android.content.Context.MODE_PRIVATE;
+import static android.os.ParcelFileDescriptor.MODE_WORLD_READABLE;
+import static android.provider.Telephony.Mms.Part.FILENAME;
 import static com.example.alex.myrestourant.Fragment2.sinchronization;
 import static com.example.alex.myrestourant.Fragment3.sinchronization_table2;
 import static com.example.alex.myrestourant.Fragment4.counter_del_all_base2;
+import static com.example.alex.myrestourant.MainActivity.GlobCounterOrders;
 import static com.example.alex.myrestourant.MainActivity.allSize;
 import static com.example.alex.myrestourant.MainActivity.counter;
 import static com.example.alex.myrestourant.MainActivity.table1_static;
@@ -39,6 +57,8 @@ public class Fragment1 extends Fragment {
     ListAdapter elements_t1;
     ListAdapterForTable2 elements_t2;
     ProgressBar progressBar;
+    private final static String FILE_NAME = "content.doc";
+
     ArrayList<TableMenuDataClass> table1 = new ArrayList<TableMenuDataClass>();
     ArrayList<TableWorkersDataClass> table2 = new ArrayList<TableWorkersDataClass>();
 
@@ -264,11 +284,16 @@ int a=0;
                         public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                                 // DO something
-                            //String time=db.SelectTable1().getName();
-                            time_price += table1.get(position).getPrice();
-                            Toast toast = Toast.makeText(v.getContext(), "" + time_price, Toast.LENGTH_LONG);
-                            toast.show();
-
+                            String OrderInformation="----------------------------------"+" \n\r"+
+                                    "Заказ №: "+(GlobCounterOrders++)+
+                                    " \n\r"+" Название блюда: "+table1.get(position).getName()+
+                                    ".\n\r"+" Цена: "+table1.get(position).getPrice()+"грн.\n\r"+
+                                    " Дата заказа: "+table1.get(position).getDate()+". \n\r"+
+                                    " Вид блюда: "+table1.get(position).getTime_type()+". \n\r"+
+                                    " Обслуживающая смена: "+table1.get(position).getChange()+". \n\r"+
+                                    "----------------------------------"+" \n\r";
+                            FileByteWriter(OrderInformation, "Orders.txt");
+                            Toast.makeText(v.getContext(), FileByteRead("Orders.txt"), Toast.LENGTH_SHORT).show();
                         }
                     });
                     /*тслеживаем какие пункты из таблицы сотрудников были выбраны.*/
@@ -277,9 +302,15 @@ int a=0;
                         public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                                 // DO something
-                            Toast toast = Toast.makeText(v.getContext(), position + "-" + id, Toast.LENGTH_LONG);
-                            toast.show();
-
+                            String WorkersInformation="----------------------------------"+" \n\r"+
+                                    "Сотрудник №: "+(GlobCounterOrders++)+
+                                    " \n\r"+" Ф.И.О.: "+table2.get(position).getName()+
+                                    ".\n\r"+" Количество заказов: "+table2.get(position).getOrders()+"грн.\n\r"+
+                                    " Продолжительность работы: "+table2.get(position).getDuration_of_work()+". \n\r"+
+                                    " Смена: "+table2.get(position).getChange_worker()+". \n\r"+
+                                    "----------------------------------"+" \n\r";
+                            FileByteWriter(WorkersInformation, "Workers.txt");
+                            Toast.makeText(v.getContext(), FileByteRead("Workers.txt"), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -311,11 +342,17 @@ int a=0;
                             public void onItemClick(AdapterView<?> parent, View v,
                                                     int position, long id) {
                                 // DO something
-                                //String time=db.SelectTable1().getName();
-                                time_price += table1.get(position).getPrice();
-                                Toast toast = Toast.makeText(v.getContext(), "" + time_price, Toast.LENGTH_LONG);
-                                toast.show();
+                                String OrderInformation="----------------------------------"+" \n\r"+
+                                        "Заказ №: "+(GlobCounterOrders++)+
+                                        " \n\r"+" Название блюда: "+table1.get(position).getName()+
+                                        ".\n\r"+" Цена: "+table1.get(position).getPrice()+"грн.\n\r"+
+                                        " Дата заказа: "+table1.get(position).getDate()+". \n\r"+
+                                        " Вид блюда: "+table1.get(position).getTime_type()+". \n\r"+
+                                        " Обслуживающая смена: "+table1.get(position).getChange()+". \n\r"+
+                                        "----------------------------------"+" \n\r";
 
+                                FileByteWriter(OrderInformation, "Orders.txt");
+                                Toast.makeText(v.getContext(), FileByteRead("Orders.txt"), Toast.LENGTH_SHORT).show();
                             }
                         });
                     /*тслеживаем какие пункты из таблицы сотрудников были выбраны.*/
@@ -324,9 +361,15 @@ int a=0;
                             public void onItemClick(AdapterView<?> parent, View v,
                                                     int position, long id) {
                                 // DO something
-                                Toast toast = Toast.makeText(v.getContext(), position + "-" + id, Toast.LENGTH_LONG);
-                                toast.show();
-
+                                String WorkersInformation="----------------------------------"+" \n\r"+
+                                        "Сотрудник №: "+(GlobCounterOrders++)+
+                                        " \n\r"+" Ф.И.О.: "+table2.get(position).getName()+
+                                        ".\n\r"+" Количество заказов: "+table2.get(position).getOrders()+"грн.\n\r"+
+                                        " Продолжительность работы: "+table2.get(position).getDuration_of_work()+". \n\r"+
+                                        " Смена: "+table2.get(position).getChange_worker()+". \n\r"+
+                                        "----------------------------------"+" \n\r";
+                                FileByteWriter(WorkersInformation, "Workers.txt");
+                                Toast.makeText(v.getContext(), FileByteRead("Workers.txt"), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -340,4 +383,66 @@ int a=0;
             }
         }
     }
+    private boolean FileByteWriter(String text_for_write, String myFilePath){
+        try{
+            /*
+             * Создается объект файла, при этом путь к файлу находиться методом класcа Environment
+             * Обращение идёт, как и было сказано выше к внешнему накопителю
+             */
+                File myFile = new File(Environment.getExternalStorageDirectory().toString() + "/" + myFilePath);
+                myFile.createNewFile();                               // Создается файл, если он не был создан
+                FileOutputStream outputStream = new FileOutputStream(myFile, true);   // После чего создаем поток для записи
+                outputStream.write(text_for_write.getBytes());                            // и производим непосредственно запись
+                outputStream.close();
+            return true;
+        }catch (FileNotFoundException e) {
+        e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private String FileByteRead(String myFilePath) {
+        /*
+         * Аналогично создается объект файла
+         */
+        File myFile = new File(Environment.getExternalStorageDirectory().toString() + "/" + myFilePath);
+        String line1="";
+        try {
+            FileInputStream inputStream = new FileInputStream(myFile);
+            /*
+             * Буфферезируем данные из выходного потока файла
+             */
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            /*
+             * Класс для создания строк из последовательностей символов
+             */
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            try {
+                /*
+                 * Производим построчное считывание данных из файла в конструктор строки,
+                 * Псоле того, как данные закончились, производим вывод текста в TextView
+                 */
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                    line1+=line;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return line1;
+    }
+
 }
+
+
+
+
+
