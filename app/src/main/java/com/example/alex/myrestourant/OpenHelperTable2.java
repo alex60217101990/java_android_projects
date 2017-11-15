@@ -8,10 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import static com.example.alex.myrestourant.MainActivity.CastomToast;
+
 // Класс для создания БД #2
 public class OpenHelperTable2 extends SQLiteOpenHelper implements AllTableInterface, ConstForDataBase {
     OpenHelperTable2(Context context) {
         super(context, DATA_BASE_NAME1, null, DATA_BASE_VERSION);
+        CastomToast(context, "Data Base \"Worker's\" is active....",150);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {

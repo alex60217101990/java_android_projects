@@ -19,6 +19,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -30,13 +31,16 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -50,6 +54,8 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
+import com.sdsmdg.harjot.rotatingtext.RotatingTextWrapper;
+import com.sdsmdg.harjot.rotatingtext.models.Rotatable;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -74,6 +80,8 @@ import static java.security.AccessController.getContext;
 
 import android.view.View.OnTouchListener;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 public class MainActivity extends AppCompatActivity implements OnTouchListener {
     private FrameLayout container;
     int sost1=0;
@@ -82,8 +90,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
     private Fragment1 myFragment1;
     private Fragment2 myFragment2;
     private Fragment3 myFragment3;
+    private Toolbar toolbar;
     static int GlobCounterOrders=0;
-    final String FILE_NAME = "OOrders.txt";
     static int allSize=0;
     private Handler handler = new Handler();
     static int counter;
@@ -100,8 +108,38 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
         container = (FrameLayout) findViewById(R.id.container);
+
+/*вынести этот блок в шапку фрагмента с отправкой json а сервер*/
+
+/*
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    RotatingTextWrapper rotatingTextWrapper = (RotatingTextWrapper) findViewById(R.id.custom_switcher);
+                    rotatingTextWrapper.setSize(24);
+
+                    Rotatable rotatable = new Rotatable(Color.parseColor("#7CFC00"), 1000, "", "\"My", "favorite", " Restaurant\"");
+                    rotatable.setSize(24);
+                    //rotatable.setInterpolator(new AccelerateInterpolator());
+                    rotatable.setAnimationDuration(500);
+/*
+                Rotatable rotatable2 = new Rotatable(Color.parseColor("#DC143C"), 1000, ", " City!");
+                rotatable2.setSize(23);
+                rotatable2.setInterpolator(new DecelerateInterpolator());
+                rotatable2.setAnimationDuration(450);*/
+/*
+                    rotatingTextWrapper.setContent("Project ?", rotatable);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+*/
 
 
         runOnUiThread(new Runnable() {
@@ -258,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     loadFragment(new Fragment1(), 2);
                     text.setText("Таблица базы данных:");
+                    text.setSelected(true);
                     return true;
                 }
                 case R.id.del_table: {
@@ -266,6 +305,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                     /*del fragment*/
                     loadFragment(new Fragment4(),3);
                     text.setText("Удаление информации из базы данных:");
+                    text.setSelected(true);
                     return true;
                 }
                 case R.id.add_table1: {
@@ -273,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     loadFragment(new Fragment2(), 4);
                     text.setText("Добавление информации в таблицу заказов:");
+                    text.setSelected(true);
                     return true;
                 }
                 case R.id.add_table2: {
@@ -280,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     loadFragment(new Fragment3(), 5);
                     text.setText("Добавление информации в таблицу сотрудников:");
+                    text.setSelected(true);
                     /*3 fragment*/
                     return true;
                 }
@@ -364,6 +406,39 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                 }
                 return true;
             }
+
+    int WindowHeight() {
+        Display display = getWindowManager().getDefaultDisplay();
+        int height = display.getHeight();  // deprecated
+        return height;
+    }
+    int WindowWidth() {
+        Display display = getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();  // deprecated
+        return width;
+    }
+    static void CastomToast(Context context, String info, int height){
+        final LoadToast lt = new LoadToast(context);
+        lt.setText(info);
+        lt.setTranslationY(height);
+        lt.setTextColor(Color.rgb(224, 255, 255)).setBackgroundColor(Color.rgb(219, 112, 147)).setProgressColor(Color.rgb(0, 0, 255));
+        lt.show();
+        final Handler handler = new Handler();
+        Timer timer=new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            lt.hide();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }};
+        timer.schedule(timerTask, 3000);
+    }
 }
 
 

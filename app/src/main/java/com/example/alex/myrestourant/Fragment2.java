@@ -27,6 +27,7 @@ import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 
+import static com.example.alex.myrestourant.Fragment3.showMessage;
 
 
 /**
@@ -71,8 +72,7 @@ public class Fragment2 extends Fragment {
                     t_name = editText1.getText().toString();
                     proverka++;
                 } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[0] + "-incorect name", Toast.LENGTH_SHORT);
-                    toast.show();
+                   showMessage(view.findViewById(R.id.t1),"-incorect name",3);
                 }
                 editText1 = (EditText) view.findViewById(R.id.t2);
                 str1[1] = editText1.getText().toString();
@@ -81,12 +81,10 @@ public class Fragment2 extends Fragment {
                         t_price = Double.valueOf(editText1.getText().toString());
                         proverka++;
                     } catch (Exception e) {
-                        Toast toast = Toast.makeText(view.getContext(), str1[1] + "-incorect price", Toast.LENGTH_SHORT);
-                        toast.show();
+                        showMessage(view.findViewById(R.id.t2),"-incorect price",3);
                     }
                 } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[1] + "-incorect price", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showMessage(view.findViewById(R.id.t2),"-incorect price",3);
                 }
                 editText1 = (EditText) view.findViewById(R.id.t3);
                 str1[2] = editText1.getText().toString();
@@ -95,12 +93,10 @@ public class Fragment2 extends Fragment {
                         t_date = Long.valueOf(editText1.getText().toString());
                         proverka++;
                     } catch (Exception e) {
-                        Toast toast = Toast.makeText(view.getContext(), str1[2] + "-incorect date", Toast.LENGTH_SHORT);
-                        toast.show();
+                        showMessage(view.findViewById(R.id.t3),str1[2] +"-incorect date",3);
                     }
                 } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[2] + "-incorect date", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showMessage(view.findViewById(R.id.t3),"-incorect date",3);
                 }
                 editText1 = (EditText) view.findViewById(R.id.t4);
                 str1[3] = editText1.getText().toString();
@@ -108,8 +104,7 @@ public class Fragment2 extends Fragment {
                     t_type = editText1.getText().toString();
                     proverka++;
                 } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[3] + "-incorect type of dish", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showMessage(view.findViewById(R.id.t4),str1[3] + "-incorect type of dish",3);
                 }
                 editText1 = (EditText) view.findViewById(R.id.t5);
                 str1[4] = editText1.getText().toString();
@@ -119,6 +114,7 @@ public class Fragment2 extends Fragment {
                 } else {
                     Toast toast = Toast.makeText(view.getContext(), str1[4] + "-incorect change", Toast.LENGTH_SHORT);
                     toast.show();
+                    showMessage(view.findViewById(R.id.t5),"-incorect change",3);
                 }
                 editText1 = (EditText) view.findViewById(R.id.t6);
                 str1[5] = editText1.getText().toString();
@@ -126,8 +122,7 @@ public class Fragment2 extends Fragment {
                     t_icon = editText1.getText().toString();
                     proverka++;
                 } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[5] + "-incorect url", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showMessage(view.findViewById(R.id.t6),str1[5] + "-incorect url",3);
                 }
                 if (proverka == 6) {
                     try {

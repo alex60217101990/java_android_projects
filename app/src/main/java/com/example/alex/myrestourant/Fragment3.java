@@ -3,6 +3,8 @@ package com.example.alex.myrestourant;
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -28,7 +30,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.tooltip.Tooltip;
+
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Alex on 28.10.2017.
  */
@@ -62,67 +69,57 @@ public class Fragment3 extends Fragment {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    String[] str1 = new String[5];
+                    editText1 = (EditText) view.findViewById(R.id.workers_t1);
+                    str1[0] = editText1.getText().toString();
+                    if (str1[0].length() > 0 && str1[0].matches("^([А-ЯЁ][а-яё]+\\s?){3}$")) {
+                        t_name = editText1.getText().toString();
+                        proverka++;
+                    } else {
+                        showMessage(view.findViewById(R.id.workers_t1),"-incorect name",3);
+                    }
+                    editText1 = (EditText) view.findViewById(R.id.workers_t2);
+                    str1[1] = editText1.getText().toString();
+                    if (str1[1].length() > 0 && str1[1].matches("^[0-9]{1,}\\s?$")) {
+                        try {
+                            t_orders = Long.valueOf(editText1.getText().toString());
+                            proverka++;
+                        } catch (Exception e) {
+                            showMessage(view.findViewById(R.id.workers_t2),"-incorect the number of orders",3);
+                        }
+                    } else {
+                        showMessage(view.findViewById(R.id.workers_t2),"-incorect the number of orders",3);
+                    }
+                    editText1 = (EditText) view.findViewById(R.id.workers_t3);
+                    str1[2] = editText1.getText().toString();
+                    if (str1[2].length() > 0 && str1[2].matches("^[0-9]{1,}\\s?$")) {
+                        try {
+                            t_count = Long.valueOf(editText1.getText().toString());
+                            proverka++;
+                        } catch (Exception e) {
+                            showMessage(view.findViewById(R.id.workers_t3),"-incorect worked shifts",3);
+                        }
+                    } else {
+                        showMessage(view.findViewById(R.id.workers_t3),"-incorect worked shifts",3);
+                    }
+                    editText1 = (EditText) view.findViewById(R.id.workers_t4);
+                    str1[3] = editText1.getText().toString();
+                    if (str1[3].length() > 0 && str1[3].matches("^[А-ЯЁ]?[а-яё]+\\s?$")) {
+                        t_change = editText1.getText().toString();
+                        proverka++;
+                    } else {
+                        showMessage(view.findViewById(R.id.workers_t4),"-incorect change",3);
+                    }
+                    editText1 = (EditText) view.findViewById(R.id.workers_t5);
+                    str1[4] = editText1.getText().toString();
+                    if (str1[4].length() > 0 && str1[4].matches("^(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))$")) {
+                        t_foto = editText1.getText().toString();
+                        proverka++;
+                    } else {
+                      showMessage(view.findViewById(R.id.workers_t5),"-incorect url",3);
+                    }
 
-                String[] str1 = new String[5];
-                editText1 = (EditText) view.findViewById(R.id.workers_t1);
-                str1[0] = editText1.getText().toString();
-                if (str1[0].length() > 0 && str1[0].matches("^([А-ЯЁ][а-яё]+\\s?){3}$")) {
-                    t_name = editText1.getText().toString();
-                    proverka++;
-                } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[0] + "-incorect name", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                editText1 = (EditText) view.findViewById(R.id.workers_t2);
-                str1[1] = editText1.getText().toString();
-                if (str1[1].length() > 0 && str1[1].matches("^[0-9]{1,}\\s?$")) {
-                    try {
-                        t_orders = Long.valueOf(editText1.getText().toString());
-                        proverka++;
-                    } catch (Exception e) {
-                        Toast toast = Toast.makeText(view.getContext(), str1[1] + "-incorect the number of orders",
-                                Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[1] + "-incorect the number of orders",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                editText1 = (EditText) view.findViewById(R.id.workers_t3);
-                str1[2] = editText1.getText().toString();
-                if (str1[2].length() > 0 && str1[2].matches("^[0-9]{1,}\\s?$")) {
-                    try {
-                        t_count = Long.valueOf(editText1.getText().toString());
-                        proverka++;
-                    } catch (Exception e) {
-                        Toast toast = Toast.makeText(view.getContext(), str1[2] + "-incorect worked shifts",
-                                Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[2] + "-incorect worked shifts",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                editText1 = (EditText) view.findViewById(R.id.workers_t4);
-                str1[3] = editText1.getText().toString();
-                if (str1[3].length() > 0 && str1[3].matches("^[А-ЯЁ]?[а-яё]+\\s?$")) {
-                    t_change = editText1.getText().toString();
-                    proverka++;
-                } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[3] + "-incorect change", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                editText1 = (EditText) view.findViewById(R.id.workers_t5);
-                str1[4] = editText1.getText().toString();
-                if (str1[4].length() > 0 && str1[4].matches("^(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))$")) {
-                    t_foto = editText1.getText().toString();
-                    proverka++;
-                } else {
-                    Toast toast = Toast.makeText(view.getContext(), str1[4] + "-incorect url", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
                 if (proverka == 5) {
                     try {
                         db = new DBConnectorAll(view.getContext());
@@ -149,9 +146,37 @@ public class Fragment3 extends Fragment {
                     Toast.makeText(view.getContext(), "OK:****0000"+t_name+t_orders+t_count+t_change+t_foto,
                             Toast.LENGTH_SHORT).show();
                 }
+                }catch(Exception e){
+                    Toast.makeText(view.getContext(), "Incorect data.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;
+    }
+
+   static void showMessage(View v, String text, int timeSec) {
+        final View x = v;
+        final String messageText = text;
+
+        final Tooltip tooltip = new Tooltip.Builder(x)
+                .setText(messageText)
+                .setGravity(Gravity.TOP)
+                .setBackgroundColor(Color.rgb(100, 149, 237))
+                .setTextColor(Color.rgb(224, 255, 255))
+                .show();
+
+        final Handler handler = new Handler();
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                       tooltip.dismiss();
+                    }
+                });
+            }
+        };
+        timer.schedule(timerTask, timeSec*1000);
     }
 
 }

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
     <SlidingDrawer
         android:id="@+id/drawer"
-        app:layout_widthPercent="40%"
+        app:layout_widthPercent="50%"
         app:layout_heightPercent="90%"
         android:content="@+id/content"
         android:layout_centerVertical="true"
@@ -34,12 +34,28 @@
             android:background="#55000000"
             android:orientation="vertical"
             android:padding="10dp" >
+
+            <!-- вынести этот блок в шапку фрагмента с отправкой json а сервер
+            <com.sdsmdg.harjot.rotatingtext.RotatingTextWrapper
+                android:id="@+id/custom_switcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>-->
+
             <TextView
                 android:textSize="25dp"
                 android:textColor="#000000"
                 android:id="@+id/text_message"
                 android:layout_width="wrap_content"
-                android:text="646454"
+                android:text="Справочная информация"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </SlidingDrawer>

@@ -19,8 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.skyfishjy.library.RippleBackground;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;

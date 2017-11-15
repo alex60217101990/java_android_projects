@@ -3,7 +3,17 @@ package com.example.alex.myrestourant;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.os.Handler;
+import android.view.Display;
 import android.widget.Toast;
+
+import net.steamcrafted.loadtoast.LoadToast;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.example.alex.myrestourant.MainActivity.CastomToast;
 
 /**
  * Created by Alex on 21.10.2017.
@@ -13,9 +23,9 @@ import android.widget.Toast;
 public class OpenHelper extends SQLiteOpenHelper implements AllTableInterface, ConstForDataBase {
     OpenHelper(Context context) {
         super(context, DATA_BASE_NAME, null, DATA_BASE_VERSION);
-        Toast toast = Toast.makeText(context, "111111", Toast.LENGTH_LONG);
-        toast.show();
+   CastomToast(context, "Data Base \"Menu\" is active....",100);
     }
+
     @Override
     synchronized  public void onCreate(SQLiteDatabase db) {
         try {
@@ -28,8 +38,8 @@ public class OpenHelper extends SQLiteOpenHelper implements AllTableInterface, C
                     COLUMN_TIMES_OF_DAY + " TEXT, " +
                     COLUMN_ICON + " TEXT); ";
             db.execSQL(query);
+
         }catch (Exception e){
-            close();
         }
     }
     @Override

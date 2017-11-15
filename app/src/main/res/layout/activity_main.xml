@@ -9,6 +9,10 @@
     android:id="@+id/main"
     tools:context=".MainActivity">
 
+    <!--<include
+        layout="@layout/tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>-->
     <FrameLayout
         android:id="@+id/container"
         android:background="#ADD8E6"
@@ -16,7 +20,7 @@
         android:layout_height="match_parent" >
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+           android:layout_height="match_parent"
             android:id="@+id/webview">
         </WebView>
     </FrameLayout>
